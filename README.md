@@ -1,5 +1,7 @@
 # Python
 
+---------
+
 ### 1. What is FastAPI? What are its main advantages over frameworks like Flask or Django REST Framework?
 
 Answer:
@@ -632,7 +634,9 @@ Keep secrets out of source control. Use vault services or secret managers (AWS S
 For different environments (dev/staging/prod), maintain separate config, possibly via separate environment variables or config files.
 
 Encrypt or ensure restricted access to logs / configs.
+
 ----------
+
 ### 1. Core Python (30 Questions)
 
 ### Q1. What are Python’s key features?
@@ -777,7 +781,9 @@ A: Runs multiple coroutines concurrently, returns results as list.
 
 ### Q45. What are futures and tasks in asyncio?
 A: Future = placeholder for result. Task = coroutine wrapped in Future.
+
 ---------
+
 3. FastAPI (25 Questions)
 
 ### Q46. What is FastAPI?
@@ -870,7 +876,9 @@ A: With TestClient from Starlette.
 
 ### Q70. How to deploy FastAPI?
 A: Using uvicorn, gunicorn, Docker, Kubernetes, AWS/GCP.
+
 ---------
+
 4. Database & ORM (10 Questions)
 
 ### Q71. What is SQLAlchemy ORM?
@@ -902,7 +910,9 @@ A: Using session.begin() or async with session.begin().
 
 ### Q80. Difference between NoSQL and SQL?
 A: SQL = structured, relations, ACID. NoSQL = flexible schema, horizontal scaling.
+
 ---------
+
 5. Frontend + Full Stack Concepts (10 Questions)
 
 ### Q81. What is the role of frontend in full stack?
@@ -1283,7 +1293,9 @@ A: Removing unused code in bundles.
 
 ### Q200. How to handle 401 unauthorized in frontend?
 A: Intercept response, redirect to login.
+
 ---------
+
 Core Python (Basics to Advanced)
 
 ### Q1. What are Python’s key features?
@@ -1898,7 +1910,9 @@ Middleware logging.
 Prometheus + Grafana.
 
 APM (New Relic, Datadog).
+
 ---------
+
 ### 1. Python Core (20 Questions)
 
 ### What are Python data types you use most frequently?
