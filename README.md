@@ -632,9 +632,7 @@ Keep secrets out of source control. Use vault services or secret managers (AWS S
 For different environments (dev/staging/prod), maintain separate config, possibly via separate environment variables or config files.
 
 Encrypt or ensure restricted access to logs / configs.
-
-
---------
+----------
 ### 1. Core Python (30 Questions)
 
 ### Q1. What are Python’s key features?
@@ -779,7 +777,7 @@ A: Runs multiple coroutines concurrently, returns results as list.
 
 ### Q45. What are futures and tasks in asyncio?
 A: Future = placeholder for result. Task = coroutine wrapped in Future.
-
+---------
 3. FastAPI (25 Questions)
 
 ### Q46. What is FastAPI?
@@ -872,7 +870,7 @@ A: With TestClient from Starlette.
 
 ### Q70. How to deploy FastAPI?
 A: Using uvicorn, gunicorn, Docker, Kubernetes, AWS/GCP.
-
+---------
 4. Database & ORM (10 Questions)
 
 ### Q71. What is SQLAlchemy ORM?
@@ -904,7 +902,7 @@ A: Using session.begin() or async with session.begin().
 
 ### Q80. Difference between NoSQL and SQL?
 A: SQL = structured, relations, ACID. NoSQL = flexible schema, horizontal scaling.
-
+---------
 5. Frontend + Full Stack Concepts (10 Questions)
 
 ### Q81. What is the role of frontend in full stack?
@@ -969,6 +967,7 @@ A: HTTPS, JWT/OAuth2, input validation, rate limiting.
 ### Q100. How to monitor FastAPI in production?
 A: Use Prometheus + Grafana, logging, APM tools.
 --------
+
 1. Advanced Python (25)
 
 ### Q101. What is Python’s __new__ method?
@@ -1046,7 +1045,9 @@ A: Override __setattr__ and raise exception.
 ### Q125. What is Python’s dataclasses module?
 A: Introduced in 3.7, simplifies boilerplate for classes with auto __init__, __repr__.
 
-2. FastAPI Advanced (25)
+---------
+
+### 2. FastAPI Advanced (25)
 
 ### Q126. How does FastAPI support WebSockets?
 A: Using @app.websocket("/ws").
@@ -1123,7 +1124,9 @@ A: Simple /health route returning JSON.
 ### Q150. How to implement async background jobs without Celery?
 A: Use FastAPI BackgroundTasks.
 
-3. Database & ORM (20)
+---------
+
+### 3. Database & ORM (20)
 
 ### Q151. What is difference between ORM and raw SQL?
 A: ORM abstracts queries, raw SQL gives full control.
@@ -1184,6 +1187,8 @@ A: echo=True in engine.
 
 ### Q170. How to use UUID as primary key in SQLAlchemy?
 A: Use UUID type or sqlalchemy.dialects.postgresql.UUID.
+
+---------
 
 4. System Design & DevOps (20)
 
@@ -1279,247 +1284,248 @@ A: Removing unused code in bundles.
 ### Q200. How to handle 401 unauthorized in frontend?
 A: Intercept response, redirect to login.
 
---------
+---------
+
 ### 1. Python Core (20 Questions)
 
-What are Python data types you use most frequently?
+### What are Python data types you use most frequently?
 Answer: int, float, str, list, dict, tuple, set, bool, NoneType. Each serves a purpose: lists for ordered collections, dicts for key‑value mapping, tuples for immutability.
 
-Difference between mutable and immutable objects?
+### Difference between mutable and immutable objects?
 Answer: Mutable objects (list, dict, set) can be changed in place. Immutable (str, tuple, frozenset) cannot; changes create a new object. This affects performance and hashing.
 
-What is a Python virtual environment and why use it?
+### What is a Python virtual environment and why use it?
 Answer: An isolated environment to manage dependencies per project, avoiding version conflicts. Tools: venv, virtualenv, pipenv.
 
-Explain Python's GIL.
+### Explain Python's GIL.
 Answer: The Global Interpreter Lock allows only one thread to execute Python bytecode at a time. Concurrency is achieved with multiprocessing or async IO for CPU‑bound tasks.
 
-Difference between deepcopy and copy.
+### Difference between deepcopy and copy.
 Answer: copy.copy() makes a shallow copy (nested objects are shared). copy.deepcopy() recursively copies all objects.
 
-Explain Python decorators.
+### Explain Python decorators.
 Answer: Functions that wrap other functions to modify behavior. Common use cases: logging, authentication, caching.
 
-How do you manage memory in Python?
+### How do you manage memory in Python?
 Answer: Python uses reference counting + garbage collector for cyclic references. You can force GC using gc.collect().
 
 Explain *args and **kwargs.
 Answer: *args collects positional args as tuple, **kwargs collects keyword args as dict. Used for flexible APIs.
 
-What is context manager?
+### What is context manager?
 Answer: Object implementing __enter__ and __exit__, allowing resource management using with statement.
 
-Difference between is and ==.
+### Difference between is and ==.
 Answer: is checks identity (same object in memory), == checks value equality.
 
-How do you handle exceptions gracefully?
+### How do you handle exceptions gracefully?
 Answer: Use try/except/finally, log errors, raise custom exceptions. Keep except blocks specific.
 
-Explain list comprehensions and generator expressions.
+### Explain list comprehensions and generator expressions.
 Answer: List comprehension builds list eagerly; generator expression yields items lazily for efficiency.
 
-How to use dataclasses?
+### How to use dataclasses?
 Answer: Use @dataclass decorator to auto‑generate init, repr, eq. Good for lightweight data containers.
 
-What are Python descriptors?
+### What are Python descriptors?
 Answer: Objects defining __get__, __set__, __delete__ methods, used in property, ORM field definitions.
 
-Explain MRO (Method Resolution Order).
+### Explain MRO (Method Resolution Order).
 Answer: Defines order of class hierarchy lookup. Follows C3 linearization.
 
-Difference between classmethod and staticmethod.
+### Difference between classmethod and staticmethod.
 Answer: classmethod receives class as first argument, used for alternate constructors. staticmethod is a plain function inside class namespace.
 
-What are Python typing hints?
+### What are Python typing hints?
 Answer: Optional annotations for function signatures and variables to improve readability and tooling.
 
-What are Python contextvars?
+### What are Python contextvars?
 Answer: Thread/Task local storage for async applications.
 
-Explain Python's __slots__.
+### Explain Python's __slots__.
 Answer: Defines fixed set of attributes, reducing memory footprint by disabling dynamic __dict__.
 
-How to optimize Python performance?
+### How to optimize Python performance?
 Answer: Use built‑in functions, avoid unnecessary loops, leverage NumPy, caching, concurrency, and profiling tools (cProfile).
 
 ### 2. FastAPI Core (20 Questions)
 
-What is FastAPI?
+### What is FastAPI?
 Answer: A modern async Python web framework built on Starlette (ASGI) + Pydantic. Provides type‑driven validation, auto OpenAPI docs, async support, and great performance.
 
-How does dependency injection work in FastAPI?
+### How does dependency injection work in FastAPI?
 Answer: Using Depends(). FastAPI resolves function parameters automatically, allowing shared logic (DB sessions, auth) to be injected.
 
-Explain sync vs async routes.
+### Explain sync vs async routes.
 Answer: def routes run in threadpool. async def run on event loop. Use async for I/O bound tasks.
 
-What is response_model?
+### What is response_model?
 Answer: A Pydantic model used to serialize and validate output, filtering unwanted fields and generating documentation.
 
-How to add middleware?
+### How to add middleware?
 Answer: Use app.add_middleware with Starlette’s BaseHTTPMiddleware.
 
-Explain startup/shutdown events.
+### Explain startup/shutdown events.
 Answer: Use @app.on_event("startup") and @app.on_event("shutdown") to initialize and cleanup resources.
 
-How to return streaming responses?
+### How to return streaming responses?
 Answer: Use StreamingResponse with a generator or async iterator.
 
-Explain BackgroundTasks.
+### Explain BackgroundTasks.
 Answer: Allows execution of lightweight tasks after returning response.
 
-How does FastAPI auto‑generate docs?
+### How does FastAPI auto‑generate docs?
 Answer: Uses type hints, Pydantic models, and route definitions to build OpenAPI schema.
 
-What is APIRouter?
+### What is APIRouter?
 Answer: A way to modularize routes, group endpoints, set prefixes, tags, and shared dependencies.
 
-How to use security dependencies?
+### How to use security dependencies?
 Answer: Use OAuth2PasswordBearer or custom dependencies with Depends().
 
-How to enable CORS?
+### How to enable CORS?
 Answer: Use CORSMiddleware with allowed origins, methods, headers.
 
-Explain file upload handling.
+### Explain file upload handling.
 Answer: Use UploadFile and File() to handle streamed uploads without reading entire file into memory.
 
-How to mount static files?
+### How to mount static files?
 Answer: app.mount("/static", StaticFiles(directory="static"))
 
-How to override dependencies for tests?
+### How to override dependencies for tests?
 Answer: Set app.dependency_overrides[dep] = override_func.
 
-How to implement pagination?
+### How to implement pagination?
 Answer: Use query params (limit, offset) or cursor-based pagination. Return metadata.
 
-How to customize OpenAPI schema?
+### How to customize OpenAPI schema?
 Answer: Override app.openapi method and return modified schema.
 
-How to handle custom exceptions?
+### How to handle custom exceptions?
 Answer: Register handler with @app.exception_handler(MyException).
 
-When to choose FastAPI over Flask?
+### When to choose FastAPI over Flask?
 Answer: When async, type hints, auto docs, and high performance are required.
 
 ### 3. Async & Concurrency (15 Questions)
 
-What is ASGI?
+### What is ASGI?
 Answer: Async Server Gateway Interface, supports async frameworks, WebSockets, background tasks.
 
-Explain concurrency vs parallelism.
+### Explain concurrency vs parallelism.
 Answer: Concurrency = task switching, parallelism = tasks running truly simultaneously.
 
-What happens if you block inside async def?
+### What happens if you block inside async def?
 Answer: Event loop freezes. Use threadpool (run_in_executor) for blocking calls.
 
-What is asyncio event loop?
+### What is asyncio event loop?
 Answer: Core of async system scheduling coroutines.
 
-How to run CPU‑bound code safely?
+### How to run CPU‑bound code safely?
 Answer: Offload to process pool or background worker.
 
-Explain asyncio.gather.
+### Explain asyncio.gather.
 Answer: Runs coroutines concurrently and aggregates results.
 
-Explain backpressure.
+### Explain backpressure.
 Answer: Mechanism to slow producers when consumers are overwhelmed.
 
-What are asyncio.Lock and Semaphore used for?
+### What are asyncio.Lock and Semaphore used for?
 Answer: Protect shared resources, control concurrency.
 
-How to cancel async tasks?
+### How to cancel async tasks?
 Answer: Call task.cancel() and handle CancelledError.
 
-How to set timeouts in async code?
+### How to set timeouts in async code?
 Answer: Use asyncio.wait_for(coro, timeout).
 
-How to debug async code?
+### How to debug async code?
 Answer: Enable PYTHONASYNCIODEBUG=1, use logging, inspect tasks.
 
-Explain cooperative multitasking.
+### Explain cooperative multitasking.
 Answer: Coroutines yield control when awaiting I/O.
 
-How does Uvicorn handle concurrency?
+### How does Uvicorn handle concurrency?
 Answer: Runs event loop (uvloop by default) and handles requests concurrently.
 
-How to handle WebSockets concurrently?
+### How to handle WebSockets concurrently?
 Answer: Use connection manager, broadcast with tasks.
 
-How to avoid race conditions?
+### How to avoid race conditions?
 Answer: Lock shared state, prefer stateless design.
 
 ### 4. Database & ORM (20 Questions)
 
-How to set up SQLAlchemy with FastAPI?
+### How to set up SQLAlchemy with FastAPI?
 Answer: Create engine, session maker, Base class, yield session per request.
 
-Sync vs async SQLAlchemy?
+### Sync vs async SQLAlchemy?
 Answer: Async uses async engine + AsyncSession, requires await. Sync uses threadpool.
 
-How to run migrations?
+### How to run migrations?
 Answer: Use Alembic with revision --autogenerate and upgrade head.
 
-How to manage transactions?
+### How to manage transactions?
 Answer: Use session.begin() context manager, rollback on exception.
 
-What is eager loading?
+### What is eager loading?
 Answer: Preload relationships to avoid N+1 queries.
 
-How to do bulk insert?
+### How to do bulk insert?
 Answer: Use session.bulk_save_objects or insert().
 
-How to serialize ORM models?
+### How to serialize ORM models?
 Answer: Pydantic models with from_orm=True.
 
-How to handle DB errors?
+### How to handle DB errors?
 Answer: Catch IntegrityError, rollback, return error response.
 
-What is connection pooling?
+### What is connection pooling?
 Answer: Maintains reusable DB connections for performance.
 
-How to do multi-tenancy?
+### How to do multi-tenancy?
 Answer: Separate schemas or add tenant_id column with filters.
 
-How to seed data?
+### How to seed data?
 Answer: Run data insert script at startup or via migration.
 
-How to handle read replicas?
+### How to handle read replicas?
 Answer: Route reads to replica engine, writes to primary.
 
-How to test with database?
+### How to test with database?
 Answer: Use a test DB, rollback transactions after each test.
 
-How to profile slow queries?
+### How to profile slow queries?
 Answer: Enable echo, EXPLAIN queries, use monitoring tools.
 
-How to implement soft delete?
+### How to implement soft delete?
 Answer: Add is_deleted column, filter in queries.
 
-How to handle connection retries?
+### How to handle connection retries?
 Answer: Use pool_pre_ping=True, retry logic with Tenacity.
 
-How to enforce integrity at app level?
+### How to enforce integrity at app level?
 Answer: Validate with Pydantic, apply unique constraints.
 
-How to stream large query results?
+### How to stream large query results?
 Answer: Use yield_per() or chunked reads.
 
 ### 5. Security & Auth (15 Questions)
 
-How to hash passwords securely?
+### How to hash passwords securely?
 Answer: Use passlib with bcrypt/argon2.
 
-How to implement JWT auth?
+### How to implement JWT auth?
 Answer: Create access tokens with PyJWT, validate in dependency.
 
-How to refresh tokens?
+### How to refresh tokens?
 Answer: Use refresh tokens with longer expiry, issue new access tokens.
 
-How to protect routes?
+### How to protect routes?
 Answer: Use dependency that checks current user, raise 401 if invalid.
 
-Explain OAuth2PasswordBearer.
+### Explain OAuth2PasswordBearer.
 Answer: Extracts bearer token from Authorization header.
 
-How to implement RBAC?
+### How to implement RBAC?
 Answer: Store user roles, check permissions in dependency.
