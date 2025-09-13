@@ -1283,9 +1283,622 @@ A: Removing unused code in bundles.
 
 ### Q200. How to handle 401 unauthorized in frontend?
 A: Intercept response, redirect to login.
-
 ---------
+Core Python (Basics to Advanced)
 
+### Q1. What are Python’s key features?
+
+Interpreted, dynamically typed, high-level, object-oriented.
+
+Rich standard libraries, cross-platform, supports multiple paradigms (OOP, FP, imperative).
+
+### Q2. What is Python’s memory management model?
+
+Uses reference counting + garbage collector (GC).
+
+GC removes cycles using gc module.
+
+Memory is managed in private heap space, not directly accessible to developers.
+
+### Q3. Difference between deepcopy and shallow copy?
+
+shallow copy: copies only references (changes in nested objects reflect).
+
+deepcopy: creates entirely independent copy (no shared references).
+
+### Q4. Explain Python’s GIL (Global Interpreter Lock).
+
+Only one thread executes Python bytecode at a time (in CPython).
+
+Affects CPU-bound tasks but not I/O-bound tasks.
+
+Workarounds: multiprocessing, async, or Jython/PyPy.
+
+### Q5. How is Python different from Java?
+
+Python is dynamically typed, Java is statically typed.
+
+Python runs slower but is more concise.
+
+Python has GIL (thread limitation), Java has real multithreading.
+
+Data Structures & Algorithms
+
+### Q6. What’s the time complexity of Python’s list, dict, set?
+
+list: append O(1), pop last O(1), insert/remove O(n), indexing O(1).
+
+dict & set: average O(1) lookup, insert, delete (hashing).
+
+### Q7. Difference between list, tuple, and set?
+
+list: mutable, ordered, duplicates allowed.
+
+tuple: immutable, ordered.
+
+set: unordered, unique elements, mutable but unindexed.
+
+### Q8. How do you implement a queue and stack in Python?
+
+Stack: list.append() + list.pop().
+
+Queue: collections.deque for O(1) append/pop from both ends.
+
+### Q9. How to remove duplicates from a list while preserving order?
+
+def remove_duplicates(lst):
+    seen = set()
+    return [x for x in lst if not (x in seen or seen.add(x))]
+
+
+### Q10. How does Python handle hashing in dictionaries?
+
+Uses hash table + open addressing (collision resolution).
+
+__hash__() + __eq__() determine uniqueness.
+
+OOP & Design
+
+### Q11. Explain method resolution order (MRO).
+
+Defines order in which base classes are searched.
+
+Uses C3 linearization (Class.__mro__).
+
+### Q12. Difference between @staticmethod, @classmethod, @property?
+
+@staticmethod: no self, utility functions.
+
+@classmethod: has cls, modifies class state.
+
+@property: makes method behave like an attribute (getter/setter).
+
+### Q13. Multiple inheritance issue in Python?
+
+Diamond problem.
+
+Solved using MRO (C3 linearization).
+
+### Q14. Explain duck typing.
+
+Behavior determined by methods/attributes, not actual type.
+
+Example: object is iterable if it implements __iter__, not if it inherits from Iterable.
+
+### Q15. How does Python implement encapsulation?
+
+Public: normal names.
+
+Protected: _single_underscore.
+
+Private: __double_underscore (name mangling).
+
+Advanced Python
+
+### Q16. What is a metaclass?
+
+Class of a class.
+
+Controls class creation (__new__, __init__).
+
+Example: enforce singleton, add methods dynamically.
+
+### Q17. Difference between is and ==?
+
+is: identity check (same object).
+
+==: equality check (same value).
+
+### Q18. How are generators different from iterators?
+
+Generator: function with yield, lazy evaluation, saves state.
+
+Iterator: implements __iter__() and __next__().
+
+### Q19. What are coroutines in Python?
+
+Generalization of generators.
+
+Defined with async def, awaitable with await.
+
+Used for async I/O, concurrency.
+
+### Q20. Explain context managers.
+
+Manages resources with with statement.
+
+Implements __enter__ and __exit__.
+
+Concurrency & Parallelism
+
+### Q21. When to use multithreading vs multiprocessing in Python?
+
+Multithreading: I/O-bound tasks.
+
+Multiprocessing: CPU-bound tasks (bypasses GIL).
+
+### Q22. Difference between concurrent.futures.ThreadPoolExecutor and ProcessPoolExecutor?
+
+ThreadPoolExecutor: uses threads, better for I/O.
+
+ProcessPoolExecutor: uses processes, better for CPU-bound tasks.
+
+### Q23. Explain async/await in Python.
+
+Cooperative multitasking.
+
+async defines coroutine, await pauses until result.
+
+### Q24. How to handle race conditions in Python threads?
+
+Use threading.Lock, RLock, or Queue.
+
+### Q25. Explain difference between multiprocessing Queue and Manager?
+
+Queue: inter-process communication.
+
+Manager: provides shared objects (list, dict) across processes.
+
+Modules & Libraries
+
+### Q26. Explain difference between deepcopy in copy module and serialization (pickle).
+
+deepcopy: in-memory recursive copy.
+
+pickle: serializes objects to bytes for storage/networking.
+
+### Q27. How do you handle large datasets in Python?
+
+Use generators, yield, iterators.
+
+Libraries: pandas, numpy, dask, polars.
+
+### Q28. How does NumPy improve performance over lists?
+
+Uses contiguous memory blocks, vectorized operations in C.
+
+### Q29. Difference between @lru_cache and memoization?
+
+@lru_cache (from functools) caches function results, supports LRU eviction.
+
+Memoization is manual caching.
+
+### Q30. Explain how Python logging works.
+
+Configurable loggers, handlers, formatters.
+
+Levels: DEBUG, INFO, WARNING, ERROR, CRITICAL.
+
+Web & Frameworks
+
+### Q31. Difference between Flask and Django?
+
+Flask: microframework, lightweight, flexible.
+
+Django: batteries-included, ORM, admin, security features.
+
+### Q32. How do you secure a Django application?
+
+CSRF tokens, SQL injection prevention (ORM), XSS protection (auto-escape), HTTPS, authentication middleware.
+
+### Q33. Explain WSGI and ASGI.
+
+WSGI: synchronous, Python web standard.
+
+ASGI: asynchronous (supports websockets, async I/O).
+
+### Q34. How to scale a Python web app?
+
+Horizontal scaling with load balancers (NGINX, Gunicorn, uWSGI).
+
+Use caching (Redis, Memcached).
+
+Database replication & sharding.
+
+### Q35. How to implement REST API in Python?
+
+Use Flask/FastAPI/Django REST Framework.
+
+Define endpoints, use JSON responses, handle status codes.
+
+Testing & Debugging
+
+### Q36. How do you test Python code?
+
+unittest, pytest, nose.
+
+Mocking with unittest.mock.
+
+### Q37. Difference between unit test and integration test?
+
+Unit test: tests single function/class.
+
+Integration test: tests combined modules.
+
+### Q38. How to profile performance of Python code?
+
+cProfile, timeit, line_profiler, memory profiler.
+
+### Q39. How do you debug Python applications?
+
+pdb, logging, IDE debuggers, print (quick debugging).
+
+### Q40. Explain TDD (Test-Driven Development) in Python.
+
+Write test → run (fail) → implement → run (pass) → refactor.
+
+System Design & Best Practices
+
+### Q41. How do you design a scalable Python service?
+
+Microservices architecture.
+
+REST/GraphQL APIs.
+
+Use async (FastAPI), caching, database sharding.
+
+### Q42. How to optimize Python performance?
+
+Use C extensions (Cython, NumPy).
+
+Optimize loops with comprehension/map.
+
+Use multiprocessing or async.
+
+Profile and optimize bottlenecks.
+
+### Q43. What is dependency injection in Python?
+
+Passing dependencies (objects) from outside, not creating inside.
+
+Increases testability, modularity.
+
+### Q44. Explain SOLID principles in Python.
+
+Applied via classes, abstraction, interfaces (via ABC).
+
+### Q45. What design patterns have you used in Python?
+
+Singleton, Factory, Observer, Decorator, Proxy.
+
+Miscellaneous & Tricky
+
+### Q46. Difference between @decorator and higher-order functions?
+
+Both wrap functions, but @decorator is syntactic sugar for higher-order functions.
+
+### Q47. What is monkey patching in Python?
+
+Modifying behavior of library/class at runtime.
+
+### Q48. Why is Python slow? How to make it faster?
+
+Interpreter overhead, GIL.
+
+Solutions: Cython, Numba, PyPy, multiprocessing.
+
+### Q49. Explain with open("file.txt") as f:.
+
+Uses context manager, automatically closes file.
+
+### Q50. How do you deploy Python applications?
+
+Package with Docker.
+
+Deploy on AWS/GCP/Azure with Gunicorn, Nginx.
+
+Use CI/CD pipeline (GitHub Actions, Jenkins).
+------
+25 Advanced Python Interview Questions
+
+### Q1. Explain Python memory leaks and how to detect them.
+
+Leaks occur via lingering references, globals, cycles not collected.
+
+Detect with tracemalloc, gc.collect(), objgraph.
+
+### Q2. What is the difference between __new__ and __init__?
+
+__new__: creates a new object (called first, static method).
+
+__init__: initializes object after creation.
+
+### Q3. How do you implement immutability in Python classes?
+
+Override __setattr__ to block modification.
+
+Use namedtuple or dataclasses(frozen=True).
+
+### Q4. Explain Python’s descriptor protocol.
+
+Objects with __get__, __set__, __delete__.
+
+Used in properties, ORM models.
+
+### Q5. How do you handle circular imports?
+
+Move imports inside functions.
+
+Use importlib.
+
+Restructure packages.
+
+### Q6. What is the difference between exec() and eval()?
+
+eval: evaluates expression, returns result.
+
+exec: executes code block, returns None.
+
+### Q7. Explain Python memory views.
+
+memoryview: allows direct memory access without copying.
+
+### Q8. What are Python slots?
+
+__slots__ reduces memory by avoiding per-object __dict__.
+
+### Q9. What is asyncio event loop?
+
+Core of async. Manages tasks, coroutines, scheduling.
+
+### Q10. Explain difference between synchronous, asynchronous, and concurrent programming.
+
+Sync: one task at a time.
+
+Async: tasks yield control, cooperative.
+
+Concurrent: multiple tasks in progress (threads/processes).
+
+### Q11. How to speed up Python numerical code?
+
+Use NumPy, Numba, Cython.
+
+Avoid Python loops (vectorization).
+
+### Q12. Difference between pickling and JSON serialization?
+
+Pickle: Python-specific, binary, unsafe across languages.
+
+JSON: text-based, cross-language.
+
+### Q13. What is monkey patching drawback?
+
+Breaks maintainability, unexpected behavior.
+
+### Q14. How do you implement custom iterators?
+
+Define __iter__ and __next__.
+
+### Q15. How do you manage dependencies in Python projects?
+
+requirements.txt, pipenv, poetry.
+
+### Q16. Difference between poetry and pipenv?
+
+Both manage dependencies + virtualenvs.
+
+Poetry adds packaging + publishing.
+
+### Q17. What are Python type hints and benefits?
+
+Optional annotations (def f(x: int) -> str).
+
+Improves readability, tooling, static analysis (mypy).
+
+### Q18. How do you optimize Python logging in production?
+
+Use rotating file handlers, async logging, structured logs (JSON).
+
+### Q19. Difference between multiprocessing and multithreading overhead?
+
+Multiprocessing: higher memory, process spawn overhead.
+
+Multithreading: lower memory, blocked by GIL.
+
+### Q20. How to secure Python applications?
+
+Input validation, escaping.
+
+Use venv to isolate dependencies.
+
+Avoid eval/exec.
+
+### Q21. What’s the difference between dataclasses and namedtuple?
+
+dataclasses: mutable, more flexible, default values.
+
+namedtuple: immutable, memory efficient.
+
+### Q22. Explain dependency injection in Python with example.
+
+Pass dependencies as parameters instead of creating inside.
+
+class Service:
+    def __init__(self, db): self.db = db
+
+
+### Q23. What are weak references in Python?
+
+Do not increase refcount. Used in caches (weakref module).
+
+### Q24. Explain caching strategies in Python applications.
+
+In-memory (functools.lru_cache), Redis, file-based.
+
+### Q25. How do you build a Python CLI tool?
+
+argparse, click, typer.
+------
+🔹 25 FastAPI Interview Questions
+
+### Q26. What is FastAPI and why is it faster than Flask/Django?
+
+Based on Starlette (ASGI) + Pydantic.
+
+Async-first, uses uvicorn/gunicorn.
+
+### Q27. How does FastAPI handle validation?
+
+Uses Pydantic models for automatic request/response validation.
+
+### Q28. Explain request handling lifecycle in FastAPI.
+
+ASGI server receives request.
+
+Routes matched.
+
+Dependencies resolved.
+
+Request validated via Pydantic.
+
+Response returned.
+
+### Q29. What are dependencies in FastAPI?
+
+Functions/classes injected into endpoints (Depends()).
+
+Used for DB sessions, auth, business logic.
+
+### Q30. How does FastAPI handle async?
+
+Endpoints can be async def.
+
+Runs on event loop via Uvicorn.
+
+### Q31. What is difference between Sync and Async routes in FastAPI?
+
+Sync: executed in thread pool (blocking).
+
+Async: non-blocking, faster for I/O.
+
+### Q32. How to integrate SQLAlchemy with FastAPI?
+
+Create DB session per request (dependency).
+
+Use ORM models mapped to tables.
+
+### Q33. What is the role of Pydantic in FastAPI?
+
+Validates input/output data.
+
+Provides type hints, JSON schema.
+
+### Q34. How do you handle authentication in FastAPI?
+
+OAuth2 with JWT.
+
+Dependency injection for user retrieval.
+
+### Q35. How to secure FastAPI APIs?
+
+HTTPS, OAuth2/JWT, CORS middleware.
+
+Rate limiting (external libs).
+
+### Q36. Explain FastAPI middleware.
+
+Functions that run before/after requests.
+
+Example: logging, auth, CORS.
+
+### Q37. How to implement file upload/download in FastAPI?
+
+Upload: File, UploadFile.
+
+Download: FileResponse.
+
+### Q38. How to serve static files in FastAPI?
+
+from fastapi.staticfiles import StaticFiles
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+### Q39. How do you handle background tasks in FastAPI?
+
+BackgroundTasks dependency runs after response.
+
+### Q40. How to run FastAPI in production?
+
+uvicorn app:app --workers 4 --host 0.0.0.0.
+
+Reverse proxy with Nginx/Gunicorn.
+
+### Q41. How does FastAPI generate OpenAPI docs?
+
+Automatic via Pydantic + type hints.
+
+/docs (Swagger UI), /redoc (ReDoc).
+
+### Q42. How to handle rate limiting in FastAPI?
+
+Use middleware like slowapi.
+
+### Q43. How do you implement WebSockets in FastAPI?
+
+@app.websocket("/ws")
+async def websocket_endpoint(ws: WebSocket):
+    await ws.accept()
+    await ws.send_text("Hello")
+
+
+### Q44. How does dependency override work in FastAPI testing?
+
+Use app.dependency_overrides to replace dependencies with mocks.
+
+### Q45. How to test FastAPI endpoints?
+
+TestClient from starlette.testclient.
+
+Pytest fixtures for DB mocking.
+
+### Q46. How do you deploy FastAPI with Docker?
+
+Base image: python:3.11-slim.
+
+Install dependencies, run uvicorn.
+
+### Q47. How to handle DB transactions in FastAPI?
+
+Use dependency with yield to manage session commit/rollback.
+
+### Q48. How to implement pagination in FastAPI?
+
+Query parameters (limit, offset) with Pydantic validation.
+
+### Q49. Difference between Flask + FastAPI request handling?
+
+Flask: WSGI, sync only.
+
+FastAPI: ASGI, async/sync both.
+
+### Q50. How do you monitor FastAPI in production?
+
+Middleware logging.
+
+Prometheus + Grafana.
+
+APM (New Relic, Datadog).
+---------
 ### 1. Python Core (20 Questions)
 
 ### What are Python data types you use most frequently?
