@@ -1,5 +1,1125 @@
 # Python
 
+-------
+
+## Python Must-Know Modules & Ecosystem (Q&A)
+
+### 1. What are some must-know built-in Python modules?
+
+👉
+
+os → file system operations (paths, environment variables).
+
+sys → interpreter-related tasks, command-line args.
+
+datetime → working with dates/times.
+
+json → parsing JSON.
+
+logging → application logging.
+
+re → regex operations.
+
+subprocess → run shell commands.
+
+math / decimal / fractions → numeric operations.
+
+threading / multiprocessing → concurrency.
+
+functools → higher-order functions (lru_cache, partial).
+
+collections → Counter, defaultdict, deque, namedtuple.
+
+itertools → infinite iterators, combinatorics (chain, permutations).
+
+### 2. What are Python's most common third-party ecosystem libraries?
+
+👉
+
+Web frameworks: Django, Flask, FastAPI.
+
+Data Science: NumPy, Pandas, Matplotlib, SciPy.
+
+Machine Learning: scikit-learn, TensorFlow, PyTorch.
+
+Databases: SQLAlchemy, psycopg2, PyMongo.
+
+Async/Networking: aiohttp, requests, websockets.
+
+DevOps: Docker SDK, Fabric, Ansible modules.
+
+Testing: pytest, unittest, hypothesis.
+
+### 3. Difference between import module vs from module import func vs import module as alias?
+
+👉
+
+import math → Must call with prefix: math.sqrt(16).
+
+from math import sqrt → Direct use: sqrt(16).
+
+import math as m → Alias: m.sqrt(16).
+
+⚠️ Best practice: use import module (or alias) for readability, avoid polluting namespace.
+
+### 4. What is __all__ in Python modules?
+
+👉 __all__ defines what gets imported when using from module import *.
+Example:
+
+__all__ = ["func1", "ClassA"]
+
+### 5. What’s the difference between Python’s Standard Library and Ecosystem?
+
+👉
+
+Standard Library = Built-in modules shipped with Python (os, sys, json).
+
+Ecosystem = External community packages installed via pip (numpy, requests, sqlalchemy).
+
+### 6. How do you manage Python environments and dependencies?
+
+👉
+
+venv → built-in virtual environments.
+
+pip → package manager.
+
+pip freeze > requirements.txt → save dependencies.
+
+pip install -r requirements.txt → reinstall dependencies.
+
+Advanced: poetry or pipenv for dependency management.
+
+### 7. What are Python’s package distribution tools?
+
+👉
+
+setuptools → build & distribute packages.
+
+wheel → binary distribution format.
+
+twine → upload packages to PyPI.
+
+poetry → modern dependency + packaging tool.
+
+### 8. What are Python’s concurrency ecosystems?
+
+👉
+
+threading → I/O-bound concurrency.
+
+multiprocessing → CPU-bound parallelism.
+
+asyncio → async/await style, event loop based.
+
+concurrent.futures → thread pool & process pool abstraction.
+
+### 9. Explain WSGI, ASGI in Python ecosystem.
+
+👉
+
+WSGI = Web Server Gateway Interface, sync standard (Flask, Django).
+
+ASGI = Asynchronous Server Gateway Interface, async standard (FastAPI, Starlette).
+
+### 10. What testing frameworks are must-know in Python?
+
+👉
+
+unittest (built-in).
+
+pytest (most popular, easy to use).
+
+mock (patching in tests).
+
+hypothesis (property-based testing).
+
+🔹 Quick Summary Interview Table
+Category            Must-Know Modules/Libs
+System              os, sys, subprocess, logging
+Data                json, csv, sqlite3, re
+Iteration           itertools, collections
+Math/Time           math, datetime, decimal
+Concurrency         threading, multiprocessing, asyncio
+Web                 Flask, Django, FastAPI
+Data Science        NumPy, Pandas, Matplotlib
+Testing             unittest, pytest, mock
+
+
+### 11. What is the difference between requirements.txt and Pipfile?
+
+👉
+
+requirements.txt → simple list of dependencies (pip freeze > requirements.txt).
+
+Pipfile → richer metadata (created by pipenv), includes dev/test/prod dependencies.
+
+### 12. What is the difference between pip, pipenv, and poetry?
+
+👉
+
+pip → basic package installer.
+
+pipenv → manages virtualenvs + dependencies (Pipfile).
+
+poetry → modern dependency + packaging manager, simplifies publishing to PyPI.
+
+### 13. What are Python wheels (.whl files)?
+
+👉 Binary distribution format for Python packages.
+Faster install than building from source.
+
+### 14. What are __init__.py files used for?
+
+👉
+
+Marks a directory as a Python package.
+
+Can also execute initialization code.
+
+If empty, just signals “this is a package.”
+
+### 15. What is the purpose of if __name__ == "__main__":?
+
+👉 Ensures code runs only when executed directly, not when imported as a module.
+
+### 16. What is sys.path and how does Python find modules?
+
+👉
+
+sys.path = list of directories Python searches for imports.
+
+Order:
+
+Current script’s dir
+
+PYTHONPATH env var
+
+Standard library
+
+Site-packages
+
+### 17. What is the Python Package Index (PyPI)?
+
+👉 The official repository of Python packages (pip install requests fetches from PyPI).
+
+### 18. What is the difference between absolute and relative imports?
+
+👉
+
+Absolute: from mypackage.module import func
+
+Relative: from .module import func (dot = current package)
+
+### 19. What is monkey patching?
+
+👉 Dynamically modifying or extending a module/class at runtime.
+Example:
+
+import math
+math.sqrt = lambda x: "hacked!"
+
+### 20. How do you handle circular imports in Python?
+
+👉
+
+Reorganize code to avoid cycles.
+
+Use local imports inside functions.
+
+Use importlib for dynamic imports.
+
+### 21. What is importlib used for?
+
+👉 Module for importing modules programmatically at runtime.
+
+import importlib
+mod = importlib.import_module("math")
+print(mod.sqrt(9))
+
+### 22. What is the difference between venv and virtualenv?
+
+👉
+
+venv → built-in in Python 3.
+
+virtualenv → older, external package, works in Python 2/3.
+
+### 23. What are Python namespaces?
+
+👉
+
+Built-in → always available (len, id).
+
+Global → module-level.
+
+Local → inside functions/classes.
+
+Enclosing → nested functions.
+
+### 24. What is __pycache__ and .pyc files?
+
+👉
+
+Python caches compiled bytecode (.pyc) inside __pycache__.
+
+Speeds up program startup.
+
+### 25. How does import * work?
+
+👉
+
+Imports everything not starting with _.
+
+Controlled by __all__ if defined.
+⚠️ Not recommended (namespace pollution).
+
+### 26. What’s the difference between import time and from time import sleep?
+
+👉
+
+import time → must call time.sleep(1).
+
+from time import sleep → can call sleep(1) directly.
+
+### 27. What are Python’s package distribution formats?
+
+👉
+
+Source Distribution: .tar.gz or .zip → build required.
+
+Wheel (.whl): prebuilt, fast install.
+
+### 28. What is Conda vs Pip?
+
+👉
+
+pip → Python-only packages (from PyPI).
+
+conda → manages both Python and non-Python dependencies (C libs, ML tools).
+
+### 29. What is site-packages in Python?
+
+👉 The directory where third-party modules are installed.
+
+### 30. What are entry points in Python packages?
+
+👉 Define CLI commands for installed packages. Example in setup.py:
+
+entry_points={
+    "console_scripts": [
+        "mytool=my_package.cli:main",
+    ],
+}
+
+### 🔹 Summary of Key Ecosystem Concepts
+
+Imports & Paths → import, sys.path, absolute/relative imports.
+
+Package Management → pip, venv, poetry, pipenv.
+
+Distribution → wheels, PyPI, setup.py, entry points.
+
+Environment → virtualenvs, conda.
+
+Caching → __pycache__, .pyc.
+
+-------
+
+### 🔹 Python Internals Interview Q&A
+
+### 1. How does Python manage memory internally?
+
+Python uses a private heap for memory allocation, managed by the Python Memory Manager.
+
+Objects and data structures are stored in this heap.
+
+Memory management involves:
+
+Reference counting (primary mechanism)
+
+Garbage collection (GC) via cyclic GC for unreachable cycles
+
+### 2. What is reference counting in Python?
+
+Each object keeps a count of references pointing to it (sys.getrefcount(obj)).
+
+When the count drops to zero → object is destroyed and memory reclaimed.
+
+Problem: cannot handle circular references (hence Python has GC).
+
+### 3. How does Python’s garbage collector detect cycles?
+
+Uses a generational garbage collector:
+
+Objects are divided into generations (0, 1, 2).
+
+Young objects are collected frequently, older objects less often.
+
+Cycle detector identifies unreachable objects with references to each other.
+
+### 4. What is the GIL (Global Interpreter Lock)?
+
+A mutex in CPython ensuring only one thread executes Python bytecode at a time.
+
+Prevents race conditions in memory management.
+
+Limits multi-threaded CPU-bound performance but fine for I/O-bound tasks.
+
+### 5. How are Python functions stored in memory?
+
+Functions are first-class objects.
+
+Internally represented by PyFunctionObject, which holds:
+
+Reference to compiled bytecode (__code__)
+
+Function globals
+
+Default arguments
+
+Closure variables
+
+### 6. What is a Python frame object?
+
+Every function call creates a frame object (contains local variables, instruction pointer, etc.).
+
+Frames are linked via a call stack.
+
+Accessible via inspect.currentframe().
+
+### 7. What is the difference between is and == internally?
+
+is → checks object identity (same memory address).
+
+== → calls object’s __eq__() to compare values.
+
+### 8. How does Python handle string interning?
+
+Small strings and identifiers are interned for memory efficiency.
+
+Example:
+
+a = "hello"
+b = "hello"
+print(a is b)  # True (interned)
+
+
+Large or dynamically created strings are not always interned.
+
+### 9. How are Python integers stored internally?
+
+Small integers (usually -5 to 256) are cached (singletons).
+
+Larger integers are stored as arbitrary precision objects.
+
+### 10. How does Python execute code internally?
+
+Source code → AST (Abstract Syntax Tree) via parser.
+
+AST → bytecode via compiler.
+
+Bytecode → executed by the CPython virtual machine (interpreter loop).
+
+### 11. What are Python descriptors?
+
+Objects implementing __get__, __set__, or __delete__.
+
+Power behind properties, methods, class variables.
+
+Example:
+
+class MyDescriptor:
+    def __get__(self, obj, objtype=None):
+        return "Got value"
+class Test:
+    x = MyDescriptor()
+print(Test().x)  # "Got value"
+
+### 12. What is MRO (Method Resolution Order) in Python?
+
+Defines order of method lookup in multiple inheritance.
+
+Uses C3 linearization.
+
+Example:
+
+class A: pass
+class B(A): pass
+class C(A): pass
+class D(B, C): pass
+print(D.mro())  # [D, B, C, A, object]
+
+### 13. What is the difference between shallow copy and deep copy internally?
+
+Shallow copy: creates a new object but references inner objects (copy.copy).
+
+Deep copy: recursively copies all nested objects (copy.deepcopy).
+
+### 14. What happens when you import a module?
+
+Checks if module exists in sys.modules cache.
+
+If not → finds module file using sys.meta_path finders.
+
+Executes module code in a new namespace.
+
+Stores result in sys.modules.
+
+### 15. What is the difference between locals() and globals()?
+
+globals() → returns dictionary of current global symbol table.
+
+locals() → returns dictionary of local variables (may not always be writable).
+
+### 16. What are Python slots (__slots__)?
+
+Prevents creation of dynamic __dict__ per object → saves memory.
+
+Example:
+
+class Point:
+    __slots__ = ['x', 'y']
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+### 17. How does Python implement decorators internally?
+
+A decorator is just a function that takes another function and returns a new one.
+
+At compile-time, @decorator syntax is applied.
+
+### 18. What is the difference between CPython, PyPy, Jython?
+
+CPython → default implementation in C.
+
+PyPy → JIT-compiled for speed.
+
+Jython → runs on JVM.
+
+IronPython → runs on .NET CLR.
+
+### 19. How does Python optimize performance internally?
+
+String interning, small int caching.
+
+Bytecode optimization.
+
+Built-in C implementations for common operations (list.sort, dict).
+
+PyPy JIT for runtime optimization.
+
+### 20. What are Python metaclasses?
+
+A class of a class.
+
+Controls how classes are created.
+
+Example:
+
+class Meta(type):
+    def __new__(cls, name, bases, dct):
+        print(f"Creating class {name}")
+        return super().__new__(cls, name, bases, dct)
+
+class MyClass(metaclass=Meta):
+    pass
+
+--------
+
+### 🔹 FastAPI Internals Interview Q&A
+
+### 1. How does FastAPI handle requests internally?
+
+FastAPI is built on Starlette (ASGI framework) for request/response handling.
+
+Workflow:
+
+Uvicorn/Hypercorn (ASGI server) receives HTTP request.
+
+ASGI passes it to Starlette → FastAPI routes.
+
+FastAPI matches request with APIRouter.
+
+Dependency injection system resolves required inputs.
+
+Request handler executes → response returned through ASGI stack.
+
+### 2. What role does ASGI play in FastAPI?
+
+ASGI (Asynchronous Server Gateway Interface) = successor to WSGI.
+
+Supports async I/O, WebSockets, background tasks.
+
+FastAPI apps are just ASGI apps → run on ASGI servers like Uvicorn.
+
+### 3. How does FastAPI implement dependency injection?
+
+Each endpoint parameter can be annotated with Depends.
+
+FastAPI builds a dependency graph at startup.
+
+At runtime, it resolves dependencies recursively before calling the endpoint.
+
+Example:
+
+from fastapi import Depends
+
+def get_db():
+    return "DB Connection"
+
+@app.get("/items/")
+def read_items(db=Depends(get_db)):
+    return {"db": db}
+
+
+👉 get_db() runs first, result passed into read_items.
+
+### 4. How does FastAPI validate and parse requests?
+
+Uses Pydantic models for request/response validation.
+
+Workflow:
+
+Request body parsed from JSON → mapped to Pydantic model.
+
+Validation occurs (type checking, constraints).
+
+Invalid requests → automatic 422 Unprocessable Entity response.
+
+### 5. What is the difference between Depends and BackgroundTasks?
+
+Depends: Runs synchronously/async before endpoint executes (used for auth, DB session, etc.).
+
+BackgroundTasks: Runs after response is sent (used for sending emails, logging).
+
+### 6. How does FastAPI integrate with SQLAlchemy?
+
+Typically via a session-per-request pattern:
+
+Dependency provides a session.
+
+Session is yielded and closed after request.
+
+Example:
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+### 7. How does FastAPI handle concurrency?
+
+Based on Python’s async/await with asyncio.
+
+Endpoints can be defined as:
+
+def → runs in a threadpool executor (for sync I/O, CPU-bound work).
+
+async def → runs directly on the event loop (for async I/O).
+
+### 8. What is the difference between def and async def endpoints in FastAPI?
+
+def: executed in a thread pool → good for blocking I/O (DB drivers, file ops).
+
+async def: non-blocking, runs on event loop → good for async libraries (HTTP calls, async DB).
+
+### 9. How does FastAPI generate OpenAPI docs?
+
+At startup, FastAPI inspects all routes, dependencies, and models.
+
+Builds an OpenAPI schema (JSON spec).
+
+Swagger UI & ReDoc render it at /docs and /redoc.
+
+### 10. How does FastAPI support WebSockets?
+
+Starlette provides WebSocket support.
+
+FastAPI just wraps it with type hints.
+
+Example:
+
+@app.websocket("/ws")
+async def websocket_endpoint(ws: WebSocket):
+    await ws.accept()
+    await ws.send_text("Hello")
+    await ws.close()
+
+### 11. How does FastAPI handle middleware?
+
+Middleware is implemented as ASGI callables wrapping the app.
+
+Each middleware receives (scope, receive, send).
+
+Example:
+
+@app.middleware("http")
+async def add_header(request, call_next):
+    response = await call_next(request)
+    response.headers["X-App"] = "FastAPI"
+    return response
+
+### 12. What is the request lifecycle in FastAPI?
+
+ASGI server receives HTTP request.
+
+Middleware stack runs (logging, CORS, auth).
+
+Route matching in APIRouter.
+
+Dependency injection resolves inputs.
+
+Request handler executes.
+
+Response serialized (via JSONResponse, StreamingResponse, etc.).
+
+Middleware post-processing runs.
+
+Response returned to ASGI server.
+
+### 13. How does FastAPI manage performance with async DB drivers?
+
+Supports async DB drivers (like asyncpg for Postgres).
+
+Uses async def + await to avoid blocking event loop.
+
+SQLAlchemy 2.0 has async ORM support, fully compatible.
+
+### 14. How does FastAPI differ from Flask internally?
+
+Flask: WSGI, synchronous, request globals, no native async.
+
+FastAPI: ASGI, async-first, dependency injection, auto validation/docs.
+
+### 15. What is the difference between APIRouter and app routes?
+
+APIRouter: lets you modularize endpoints (grouped routers).
+
+Mounted into main FastAPI app via app.include_router().
+
+### 16. How does FastAPI achieve high performance compared to Django/Flask?
+
+Async support (ASGI).
+
+Starlette (highly optimized).
+
+Pydantic (Cython-based validation).
+
+No blocking global locks like Django ORM’s transaction handling.
+
+### 17. How does FastAPI handle streaming responses?
+
+Uses StreamingResponse from Starlette.
+
+Sends chunks of data instead of full content → memory-efficient.
+
+Example:
+
+from fastapi.responses import StreamingResponse
+
+def iter_file():
+    yield b"Hello"
+    yield b" World"
+
+@app.get("/stream")
+def stream():
+    return StreamingResponse(iter_file(), media_type="text/plain")
+
+### 18. How does FastAPI handle exception handling?
+
+Uses exception handlers registered with app.exception_handler().
+
+Example:
+
+@app.exception_handler(404)
+async def not_found_handler(req, exc):
+    return JSONResponse({"error": "Not found"}, status_code=404)
+
+### 19. How does FastAPI scale horizontally?
+
+Run multiple Uvicorn workers behind a process manager (Gunicorn).
+
+Example:
+
+gunicorn -k uvicorn.workers.UvicornWorker app:app -w 4
+
+### 20. What are FastAPI’s limitations?
+
+Async can be tricky with ORMs (not all DB drivers async).
+
+GIL limits CPU-bound parallelism.
+
+Startup overhead for dependency graph in very large apps.
+
+-------
+
+## Database 
+
+
+### 🔹 1. psycopg (Driver level)
+
+### What it is:
+A low-level PostgreSQL driver for Python. It connects directly to the database using SQL strings.
+
+You write raw SQL and execute it.
+
+No abstraction — you manage queries, commits, and mappings yourself.
+
+✅ Pros:
+
+Lightweight, no extra layer.
+
+Complete control over SQL (fast for complex queries).
+
+Closer to PostgreSQL features.
+
+❌ Cons:
+
+More boilerplate.
+
+You must handle schema mapping, relationships, SQL injection prevention manually.
+
+Harder to maintain in large apps.
+
+### Example (psycopg):
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=mydb user=postgres password=secret host=localhost")
+cur = conn.cursor()
+
+cur.execute("SELECT id, name FROM users WHERE id = %s", (1,))
+print(cur.fetchone())
+
+cur.execute("INSERT INTO users (name, email) VALUES (%s, %s)", ("Alice", "alice@example.com"))
+conn.commit()
+
+cur.close()
+conn.close()
+
+### 🔹 2. SQLAlchemy Core (Query Builder)
+
+What it is:
+A higher-level abstraction built on top of DB drivers like psycopg.
+
+Instead of writing raw SQL strings, you use Python objects to build SQL (select(), insert(), update(), etc.).
+
+It still returns rows, but you don’t define Python classes for tables (unless you want to).
+
+✅ Pros:
+
+Prevents SQL injection (auto escapes).
+
+Easier to build complex SQL programmatically.
+
+DB-agnostic (works with PostgreSQL, MySQL, SQLite, etc.).
+
+❌ Cons:
+
+Still not object-oriented — you work with tables and rows, not Python objects.
+
+Slightly more verbose than ORM for CRUD.
+
+### Example (SQLAlchemy Core):
+
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, select
+
+engine = create_engine("postgresql+psycopg2://postgres:secret@localhost/mydb")
+metadata = MetaData()
+
+users = Table("users", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String),
+    Column("email", String)
+)
+
+# SELECT
+with engine.connect() as conn:
+    result = conn.execute(select(users.c.id, users.c.name).where(users.c.id == 1))
+    print(result.fetchone())
+
+# INSERT
+with engine.connect() as conn:
+    conn.execute(users.insert().values(name="Alice", email="alice@example.com"))
+    conn.commit()
+
+### 🔹 3. SQLAlchemy ORM (Object Relational Mapper)
+
+What it is:
+The ORM layer of SQLAlchemy that maps Python classes ↔ database tables.
+
+Instead of dealing with rows, you work with Python objects.
+
+Makes code more readable and maintainable for large apps.
+
+✅ Pros:
+
+Cleaner, object-oriented syntax.
+
+Handles relationships (User.posts, Post.author).
+
+Great for large projects (e.g., FastAPI, Flask, Django).
+
+❌ Cons:
+
+Slightly slower than Core/raw SQL (extra abstraction).
+
+Complex queries sometimes require falling back to Core.
+
+### Example (SQLAlchemy ORM):
+
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+engine = create_engine("postgresql+psycopg2://postgres:secret@localhost/mydb")
+Session = sessionmaker(bind=engine)
+session = Session()
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+
+# SELECT
+user = session.query(User).filter_by(id=1).first()
+print(user.name)
+
+# INSERT
+new_user = User(name="Alice", email="alice@example.com")
+session.add(new_user)
+session.commit()
+
+🔹 Summary Table
+Feature                 psycopg (Driver)    SQLAlchemy Core         SQLAlchemy ORM
+Level of Abstraction    Lowest (raw SQL)    Medium (query builder)  Highest (OOP, classes)
+SQL Writing             Manual strings      Python API (build SQL)  Mostly hidden
+Safety (SQL Injection)  Manual escaping     Safe by default         Safe by default
+Ease of Use             Low                 Medium                  High
+Best For                Scripts, raw queries Query-heavy apps       Large apps, ORMs (FastAPI, Flask)
+
+### 👉 Rule of thumb:
+
+psycopg = best for scripts, raw queries.
+
+SQLAlchemy Core = best for apps with complex SQL but no need for OOP.
+
+SQLAlchemy ORM = best for web apps (Flask, FastAPI) where you want object-oriented models.
+
+
+### We’ll use two tables:
+
+users(id, name, email)
+posts(id, title, user_id)
+
+
+We’ll demonstrate:
+
+SELECT with LIMIT/OFFSET
+
+LEFT JOIN (users → posts)
+
+### 🔹 1. psycopg2 (Driver Level – raw SQL)
+import psycopg2
+
+conn = psycopg2.connect("dbname=mydb user=postgres password=secret host=localhost")
+cur = conn.cursor()
+
+# SELECT with LIMIT & OFFSET
+cur.execute("SELECT id, name FROM users ORDER BY id LIMIT 5 OFFSET 5;")
+print(cur.fetchall())
+
+# LEFT JOIN (users with their posts, even if no posts exist)
+cur.execute("""
+    SELECT u.id, u.name, p.title
+    FROM users u
+    LEFT JOIN posts p ON u.id = p.user_id
+    ORDER BY u.id;
+""")
+print(cur.fetchall())
+
+cur.close()
+conn.close()
+
+### 🔹 2. SQLAlchemy Core (Query Builder)
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, select
+
+engine = create_engine("postgresql+psycopg2://postgres:secret@localhost/mydb")
+metadata = MetaData()
+
+users = Table("users", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String),
+    Column("email", String)
+)
+
+posts = Table("posts", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("title", String),
+    Column("user_id", Integer, ForeignKey("users.id"))
+)
+
+with engine.connect() as conn:
+    # SELECT with LIMIT & OFFSET
+    stmt = select(users.c.id, users.c.name).order_by(users.c.id).limit(5).offset(5)
+    print(conn.execute(stmt).fetchall())
+
+    # LEFT JOIN
+    stmt = (
+        select(users.c.id, users.c.name, posts.c.title)
+        .select_from(users.outerjoin(posts, users.c.id == posts.c.user_id))
+        .order_by(users.c.id)
+    )
+    print(conn.execute(stmt).fetchall())
+
+### 🔹 3. SQLAlchemy ORM (Object-Oriented)
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
+
+engine = create_engine("postgresql+psycopg2://postgres:secret@localhost/mydb")
+Session = sessionmaker(bind=engine)
+session = Session()
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+    posts = relationship("Post", back_populates="author")
+
+class Post(Base):
+    __tablename__ = "posts"
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    author = relationship("User", back_populates="posts")
+
+# SELECT with LIMIT & OFFSET
+users_page2 = session.query(User).order_by(User.id).offset(5).limit(5).all()
+for u in users_page2:
+    print(u.id, u.name)
+
+# LEFT JOIN (Users with Posts)
+results = (
+    session.query(User.id, User.name, Post.title)
+    .outerjoin(Post, User.id == Post.user_id)  # LEFT JOIN
+    .order_by(User.id)
+    .all()
+)
+for row in results:
+    print(row)
+
+🔹 Output Example (if we had 7 users, 2 posts)
+[(6, 'User6'), (7, 'User7')]   # from LIMIT/OFFSET
+[(1, 'Alice', 'Hello World'),
+ (2, 'Bob', None)]             # LEFT JOIN (Bob has no posts → None)
+
+
+✅ Key takeaways:
+
+psycopg2 → write raw SQL.
+
+Core → SQL builder style, still SQL-like but Pythonic.
+
+ORM → object-oriented, works with Python classes.
+
+-------
+
+## Thread and Process
+
+### 🔹 1. Threading Example
+
+Threads share the same memory space, so they’re lightweight but limited by the Global Interpreter Lock (GIL) in Python. Good for I/O-bound tasks (network calls, file I/O, DB queries).
+
+import threading
+import time
+
+def worker(name):
+    print(f"Thread {name} starting")
+    time.sleep(2)  # simulate work (I/O wait)
+    print(f"Thread {name} finished")
+
+threads = []
+for i in range(3):
+    t = threading.Thread(target=worker, args=(i,))
+    threads.append(t)
+    t.start()
+
+for t in threads:
+    t.join()
+
+print("All threads completed")
+
+
+Output (runs concurrently, order may vary):
+
+Thread 0 starting
+Thread 1 starting
+Thread 2 starting
+Thread 0 finished
+Thread 1 finished
+Thread 2 finished
+All threads completed
+
+### 🔹 2. Multiprocessing Example
+
+Processes run in separate memory spaces with their own Python interpreter → bypasses GIL, good for CPU-bound tasks (math, image processing, data crunching).
+
+from multiprocessing import Process
+import time
+import os
+
+def worker(name):
+    print(f"Process {name} (PID={os.getpid()}) starting")
+    time.sleep(2)  # simulate heavy CPU work
+    print(f"Process {name} finished")
+
+processes = []
+for i in range(3):
+    p = Process(target=worker, args=(i,))
+    processes.append(p)
+    p.start()
+
+for p in processes:
+    p.join()
+
+print("All processes completed")
+
+
+Output (each process runs separately with its own PID):
+
+Process 0 (PID=12345) starting
+Process 1 (PID=12346) starting
+Process 2 (PID=12347) starting
+Process 0 finished
+Process 1 finished
+Process 2 finished
+All processes completed
+
+### 🔹 3. Key Differences Between Threading and Multiprocessing
+Feature         Threading 🧵                     Multiprocessing ⚡
+Memory          Shared memory (same process)    Separate memory (independent processes)
+GIL impact      Affected (only 1 thread runs Python bytecode at a time) Not affected (separate interpreters)
+Best for        I/O-bound tasks (network, DB, files)    CPU-bound tasks (math, data crunching)
+Overhead        Low (lightweight)               Higher (process creation is expensive)
+Communication   Via shared variables/locks      Via queues/pipes (need serialization)
+Debugging       Easier                          Harder (multi-process debugging)
+
+### ✅ Rule of thumb:
+
+Use threading for waiting tasks (web requests, DB queries, file read/write).
+
+Use multiprocessing for CPU-intensive tasks (image processing, ML training, big computations).
+
 ---------
 
 ### 1. What is FastAPI? What are its main advantages over frameworks like Flask or Django REST Framework?
@@ -2156,3 +3276,5 @@ Answer: Extracts bearer token from Authorization header.
 
 ### How to implement RBAC?
 Answer: Store user roles, check permissions in dependency.
+
+-------
