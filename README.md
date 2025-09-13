@@ -1122,6 +1122,119 @@ Use multiprocessing for CPU-intensive tasks (image processing, ML training, big 
 
 ---------
 
+## Unit Test
+
+### 🔹 1. Basic Unit Test Example
+#### calculator.py
+def add(a, b):
+    return a + b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Division by zero!")
+    return a / b
+
+#### test_calculator.py
+import unittest
+from calculator import add, divide
+
+class TestCalculator(unittest.TestCase):
+
+    def test_add(self):
+        self.assertEqual(add(2, 3), 5)
+        self.assertEqual(add(-1, 1), 0)
+
+    def test_divide(self):
+        self.assertEqual(divide(10, 2), 5)
+        with self.assertRaises(ValueError):
+            divide(5, 0)
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+✅ This shows basic test structure.
+
+### 🔹 2. Mock Example (using unittest.mock)
+
+Suppose you have a function that calls an external API:
+
+####  weather.py
+import requests
+
+def get_weather(city):
+    response = requests.get(f"http://api.weather.com/{city}")
+    return response.json()
+
+
+You don’t want to hit the real API in unit tests. So you mock requests.get.
+
+#### test_weather.py
+import unittest
+from unittest.mock import patch
+from weather import get_weather
+
+class TestWeather(unittest.TestCase):
+
+    @patch("weather.requests.get")
+    def test_get_weather(self, mock_get):
+        mock_get.return_value.json.return_value = {"temp": 25, "city": "Paris"}
+
+        result = get_weather("Paris")
+
+        self.assertEqual(result["temp"], 25)
+        self.assertEqual(result["city"], "Paris")
+        mock_get.assert_called_once_with("http://api.weather.com/Paris")
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+✅ Here, mock_get replaces the actual requests.get.
+
+### 🔹 3. Stub Example
+
+A stub is a simplified function/object used instead of a real dependency. Unlike a mock, it doesn’t verify calls — it just returns predefined values.
+
+#### db.py
+class Database:
+    def get_user(self, user_id):
+        raise NotImplementedError("Real DB not implemented yet")
+
+
+Stub version for testing:
+
+#### test_db.py
+import unittest
+from db import Database
+
+class StubDatabase(Database):
+    def get_user(self, user_id):
+        return {"id": user_id, "name": "Test User"}
+
+class TestDatabase(unittest.TestCase):
+
+    def test_get_user(self):
+        db = StubDatabase()
+        user = db.get_user(1)
+        self.assertEqual(user["name"], "Test User")
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+✅ The stub provides a fixed response for testing.
+
+### 🔹 Key Differences: Mock vs Stub
+
+Stub → passive, provides canned responses (used for setup).
+
+Mock → active, can assert how it was called (used for verification).
+
+---------
+
+## FAST API
+
 ### 1. What is FastAPI? What are its main advantages over frameworks like Flask or Django REST Framework?
 
 Answer:
