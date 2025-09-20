@@ -1,7 +1,6 @@
----
-
 ## 🚀 AI Architect Learning Roadmap
 
+---
 
 ### Phase 1: Foundations (1–2 months)
 
